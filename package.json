@@ -5,12 +5,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bloody-ux/babel-plugin-universal-import.git"
+    "url": "https://github.com/bloody-ux/babel-plugin-universal-import2.git"
   },
   "bugs": {
-    "url": "https://github.com/bloody-ux/babel-plugin-universal-import/issues"
+    "url": "https://github.com/bloody-ux/babel-plugin-universal-import2/issues"
   },
-  "homepage": "https://github.com/bloody-ux/babel-plugin-universal-import#readme",
+  "homepage": "https://github.com/bloody-ux/babel-plugin-universal-import2#readme",
   "author": "James Gillmore james@faceyspacey.com>",
   "license": "MIT",
   "scripts": {
