@@ -6,9 +6,9 @@ async ({ page }) => await import(\`../components/\${page}\`);
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28,7 +28,7 @@ import(\\"./Foo\\")
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50,9 +50,9 @@ import(\\"./Foo\\")
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79,9 +79,9 @@ import(\`../../base/\${page}\`)
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -106,9 +106,9 @@ import(\`./\${page}\`)
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -133,9 +133,9 @@ import(\`./base/\${page}/nested/{$another}folder\`)
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -160,9 +160,9 @@ import(\`./base/\${page}/nested/folder\`)
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -187,9 +187,9 @@ import(\`./base/\${page}\`)
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -214,9 +214,9 @@ import(\`../../base\`)
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -241,9 +241,9 @@ import(\`./base\`)
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -268,9 +268,9 @@ import(\\"./Foo.js\\")
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -295,9 +295,9 @@ import(\\"../../Foo\\")
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -322,9 +322,9 @@ import(\\"./Foo\\")
 
 var _path = _interopRequireDefault(require(\\"path\\")).default;
 
-var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import/importCss\\")).default;
+var _importCss = _interopRequireDefault(require(\\"babel-plugin-universal-import2/importCss\\")).default;
 
-var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import/universalImport\\")).default;
+var _universalImport = _interopRequireDefault(require(\\"babel-plugin-universal-import2/universalImport\\")).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
