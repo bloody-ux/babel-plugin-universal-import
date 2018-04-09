@@ -2,6 +2,10 @@
 
 var ADDED = {}
 
+function prepareChunkNamePath(path) {
+  return path.replace(/\//g, '-')
+}
+
 module.exports = function(chunkName, options) {
   var opts = options || {}
   var href = getHref(chunkName)
@@ -83,7 +87,11 @@ module.exports = function(chunkName, options) {
 
 function getHref(chunkName) {
   if (typeof window === 'undefined' || !window.__CSS_CHUNKS__) return null
-  return window.__CSS_CHUNKS__[chunkName]
+  // supported subfolder
+  return (
+    window.__CSS_CHUNKS__[chunkName] ||
+    window.__CSS_CHUNKS__[prepareChunkNamePath(chunkName)]
+  )
 }
 
 // Checks whether the browser supports link.onload
