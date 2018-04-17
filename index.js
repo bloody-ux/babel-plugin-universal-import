@@ -185,7 +185,7 @@ module.exports = function universalImportPlugin({ types: t, template }) {
         const universalImport = getImport(p, IMPORT_UNIVERSAL_DEFAULT)
         const cssOptions = {
           disableWarnings: this.opts.disableWarnings,
-          cssPathIndent: this.opts.cssPathIndent
+          cssPathIndent: this.opts.cssPathIndent // only json file is supported
         }
 
         // if being used in an await statement, return load() promise
