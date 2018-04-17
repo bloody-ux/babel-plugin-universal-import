@@ -185,7 +185,7 @@ module.exports = function universalImportPlugin({ types: t, template }) {
         const universalImport = getImport(p, IMPORT_UNIVERSAL_DEFAULT)
         const cssOptions = {
           disableWarnings: this.opts.disableWarnings,
-          getCssChunkName: this.opts.getCssChunkName
+          cssPathIndent: this.opts.cssPathIndent
         }
 
         // if being used in an await statement, return load() promise

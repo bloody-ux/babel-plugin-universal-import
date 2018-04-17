@@ -10,11 +10,15 @@ module.exports = function(chunkName, options) {
   var opts = options || {}
   // supported rewrite css chunk name to support pages in subfolder
   // the root cause is when webpack generates dynamic chunk name, it will replace slash with hyphen
-  var getCssChunkName =
-    opts.getCssChunkName ||
-    function(name) {
-      return name
-    }
+  var getCssChunkName = function() {
+    const cssPathIndent = options.cssPathIndent || 0
+    const parts = chunkName.split('/')
+    const prefix = parts.slice(0, cssPathIndent)
+    const postfix = parts.slice(cssPathIndent)
+
+    return [prefix.join('/'), postfix.join('-')].join('/')
+  }
+
   var href = getHref(getCssChunkName(chunkName))
   if (!href) {
     if (process.env.NODE_ENV === 'development' && !opts.disableWarnings) {
