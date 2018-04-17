@@ -175,7 +175,7 @@ module.exports = function universalImportPlugin({ types: t, template }) {
   )
 
   return {
-    name: 'universal-import',
+    name: 'universal-import2',
     visitor: {
       Import(p) {
         if (p[visited]) return
@@ -184,7 +184,8 @@ module.exports = function universalImportPlugin({ types: t, template }) {
         const importArgNode = getImportArgPath(p).node
         const universalImport = getImport(p, IMPORT_UNIVERSAL_DEFAULT)
         const cssOptions = {
-          disableWarnings: this.opts.disableWarnings
+          disableWarnings: this.opts.disableWarnings,
+          getCssChunkName: this.opts.getCssChunkName
         }
 
         // if being used in an await statement, return load() promise

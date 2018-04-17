@@ -2,18 +2,18 @@
   <img alt="Reactlandia Chat" src="https://s3-us-west-1.amazonaws.com/cdn.reactlandia.com/reactlandia-chat.png">
 </a>
 
-# babel-plugin-universal-import
+# babel-plugin-universal-import2
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/babel-plugin-universal-import">
+  <a href="https://www.npmjs.com/package/babel-plugin-universal-import2">
     <img src="https://img.shields.io/npm/v/babel-plugin-universal-import.svg" alt="Version" />
   </a>
 
-  <a href="https://travis-ci.org/faceyspacey/babel-plugin-universal-import">
+  <a href="https://travis-ci.org/faceyspacey/babel-plugin-universal-import2">
     <img src="https://travis-ci.org/faceyspacey/babel-plugin-universal-import.svg?branch=master" alt="Build Status" />
   </a>
 
-  <a href="https://lima.codeclimate.com/github/faceyspacey/babel-plugin-universal-import/coverage">
+  <a href="https://lima.codeclimate.com/github/faceyspacey/babel-plugin-universal-import2/coverage">
     <img src="https://lima.codeclimate.com/github/faceyspacey/babel-plugin-universal-import/badges/coverage.svg" alt="Coverage Status"/>
   </a>
 
@@ -25,11 +25,11 @@
     <img src="https://lima.codeclimate.com/github/faceyspacey/babel-plugin-universal-import/badges/gpa.svg" alt="GPA" />
   </a>
 
-  <a href="https://www.npmjs.com/package/babel-plugin-universal-import">
+  <a href="https://www.npmjs.com/package/babel-plugin-universal-import2">
     <img src="https://img.shields.io/npm/dt/babel-plugin-universal-import.svg" alt="Downloads" />
   </a>
 
-  <a href="https://www.npmjs.com/package/babel-plugin-universal-import">
+  <a href="https://www.npmjs.com/package/babel-plugin-universal-import2">
     <img src="https://img.shields.io/npm/l/babel-plugin-universal-import.svg" alt="License" />
   </a>
 </p>
@@ -41,12 +41,12 @@
 
 ## Installation
 ```
-yarn add babel-plugin-universal-import
+yarn add babel-plugin-universal-import2
 ```
 *.babelrc:*
 ```js
 {
-  "plugins": ["universal-import"]
+  "plugins": ["universal-import2"]
 }
 ```
 
@@ -63,8 +63,8 @@ const UniversalComponent = universal(import('./Foo.js'))
       ↓ ↓ ↓ ↓ ↓ ↓
 
 import universal from 'react-universal-component'
-import universalImport from 'babel-plugin-universal-import/universalImport.js'
-import importCss from 'babel-plugin-universal-import/importCss.js'
+import universalImport from 'babel-plugin-universal-import2/universalImport.js'
+import importCss from 'babel-plugin-universal-import2/importCss.js'
 import path from 'path'
 
 const UniversalComponent = universal(universalImport({
@@ -91,8 +91,8 @@ const UniversalComponent = universal(props => import(`./${props.page}`))
       ↓ ↓ ↓ ↓ ↓ ↓
 
 import universal from 'react-universal-component'
-import universalImport from 'babel-plugin-universal-import/universalImport.js'
-import importCss from 'babel-plugin-universal-import/importCss.js'
+import universalImport from 'babel-plugin-universal-import2/universalImport.js'
+import importCss from 'babel-plugin-universal-import2/importCss.js'
 import path from 'path'
 
 const UniversalComponent = universal(props => universalImport({
@@ -107,7 +107,7 @@ const UniversalComponent = universal(props => universalImport({
 
 <UniversalComponent page='Foo' />
 ```
-> NOTE: if you aren't using `react-universal-component` and you just want to serve CSS chunks from [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin), use [babel-plugin-dual-import](https://github.com/faceyspacey/babel-plugin-universal-import) instead.
+> NOTE: if you aren't using `react-universal-component` and you just want to serve CSS chunks from [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin), use [babel-plugin-dual-import](https://github.com/bloody-ux/babel-plugin-universal-import2) instead.
 
 It names all your chunks using *magic comments* 🔮 behind the scenes and is derived from the imported file. This works with both static and dynamic import paths, as you can see above.
 
@@ -125,7 +125,7 @@ If you can't use babel, you can either copy what this plugin does above, or you 
 
 ```js
 import universal from 'react-universal-component'
-import importCss from 'babel-plugin-universal-import/importCss.js'
+import importCss from 'babel-plugin-universal-import2/importCss.js'
 
 const load = props => Promise.all([
     import( /* webpackChunkName: '[request]' */ `./${props.page}`),
@@ -193,7 +193,7 @@ Reviewing a package's tests are a great way to get familiar with it. It's direct
 Below is a screenshot of this module's tests running in [Wallaby](https://wallabyjs.com) *("An Integrated Continuous Testing Tool for JavaScript")* which everyone in the React community should be using. It's fantastic and has taken my entire workflow to the next level. It re-runs your tests on every change along with comprehensive logging, bi-directional linking to your IDE, in-line code coverage indicators, **and even snapshot comparisons + updates for Jest!** I requestsed that feature by the way :). It's basically a substitute for live-coding that inspires you to test along your journey.
 
 
-![babel-plugin-universal-import screenshot](./screenshot.png)
+![babel-plugin-universal-import2 screenshot](./screenshot.png)
 
 ## More from FaceySpacey in Reactlandia
 - [redux-first-router](https://github.com/faceyspacey/redux-first-router). It's made to work perfectly with *Universal*. Together they comprise our *"frameworkless"* Redux-based approach to what Next.js does (splitting, SSR, prefetching, routing).

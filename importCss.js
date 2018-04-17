@@ -8,7 +8,14 @@ function prepareChunkNamePath(path) {
 
 module.exports = function(chunkName, options) {
   var opts = options || {}
-  var href = getHref(chunkName)
+  // supported rewrite css chunk name to support pages in subfolder
+  // the root cause is when webpack generates dynamic chunk name, it will replace slash with hyphen
+  var getCssChunkName =
+    opts.getCssChunkName ||
+    function(name) {
+      return name
+    }
+  var href = getHref(getCssChunkName(chunkName))
   if (!href) {
     if (process.env.NODE_ENV === 'development' && !opts.disableWarnings) {
       if (typeof window === 'undefined' || !window.__CSS_CHUNKS__) {
@@ -87,11 +94,7 @@ module.exports = function(chunkName, options) {
 
 function getHref(chunkName) {
   if (typeof window === 'undefined' || !window.__CSS_CHUNKS__) return null
-  // supported subfolder
-  return (
-    window.__CSS_CHUNKS__[chunkName] ||
-    window.__CSS_CHUNKS__[prepareChunkNamePath(chunkName)]
-  )
+  return window.__CSS_CHUNKS__[chunkName]
 }
 
 // Checks whether the browser supports link.onload
