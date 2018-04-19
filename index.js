@@ -42,12 +42,14 @@ function getImport(p, { id, source, nameHint }) {
   return p.hub.file[id]
 }
 
-function createTrimmedChunkName(t, importArgNode) {
+function createTrimmedChunkName(t, importArgNode, originMagicChunkName) {
+  const originPrefix = originMagicChunkName.replace('[request]', '')
+
   if (importArgNode.quasis) {
     let quasis = importArgNode.quasis.slice(0)
     const baseDir = trimChunkNameBaseDir(quasis[0].value.cooked)
     quasis[0] = Object.assign({}, quasis[0], {
-      value: { raw: baseDir, cooked: baseDir }
+      value: { raw: originPrefix || baseDir, cooked: originPrefix || baseDir }
     })
 
     quasis = quasis.map((quasi, i) => (i > 0 ? prepareQuasi(quasi) : quasi))
@@ -58,7 +60,7 @@ function createTrimmedChunkName(t, importArgNode) {
   }
 
   const moduleName = trimChunkNameBaseDir(importArgNode.value)
-  return t.stringLiteral(moduleName)
+  return t.stringLiteral(originPrefix || moduleName)
 }
 
 function prepareQuasi(quasi) {
@@ -125,16 +127,18 @@ function getCssOptionExpression(t, cssOptions) {
 
 function loadOption(t, loadTemplate, p, importArgNode, cssOptions) {
   const argPath = getImportArgPath(p)
-  const chunkName = getMagicCommentChunkName(importArgNode)
-
-  delete argPath.node.leadingComments
-  argPath.addComment('leading', ` webpackChunkName: '${chunkName}' `)
+  const orginMagicChunkName = getOriginMagicCommentChunkName(p)
+  if (!orginMagicChunkName) {
+    const chunkName = getMagicCommentChunkName(importArgNode)
+    delete argPath.node.leadingComments
+    argPath.addComment('leading', ` webpackChunkName: '${chunkName}' `)
+  }
 
   const cssOpts = getCssOptionExpression(t, cssOptions)
   const load = loadTemplate({
     IMPORT: argPath.parent,
     IMPORT_CSS: getImport(p, IMPORT_CSS_DEFAULT),
-    MODULE: createTrimmedChunkName(t, importArgNode),
+    MODULE: createTrimmedChunkName(t, importArgNode, orginMagicChunkName),
     CSS_OPTIONS: cssOpts
   }).expression
 
@@ -158,12 +162,28 @@ function resolveOption(t, resolveTemplate, importArgNode) {
   return t.objectProperty(t.identifier('resolve'), resolve)
 }
 
-function chunkNameOption(t, chunkNameTemplate, importArgNode) {
+function chunkNameOption(t, chunkNameTemplate, p, importArgNode) {
+  const orginMagicChunkName = getOriginMagicCommentChunkName(p)
+
   const chunkName = chunkNameTemplate({
-    MODULE: createTrimmedChunkName(t, importArgNode)
+    MODULE: createTrimmedChunkName(t, importArgNode, orginMagicChunkName)
   }).expression
 
   return t.objectProperty(t.identifier('chunkName'), chunkName)
+}
+
+function getOriginMagicCommentChunkName(p) {
+  const argPath = getImportArgPath(p)
+  const comments = argPath.node.leadingComments
+
+  if (!comments) return ''
+
+  const commentContent = comments[0].value
+  // convert /* webpackChunkName: "pages/[request]" */ => pages/[request]
+  const rawChunkName = commentContent.split(':')[1].trim()
+  return trimChunkNameBaseDir(
+    rawChunkName.substring(1, rawChunkName.length - 1)
+  )
 }
 
 module.exports = function universalImportPlugin({ types: t, template }) {
@@ -208,7 +228,7 @@ module.exports = function universalImportPlugin({ types: t, template }) {
             fileOption(t, p),
             pathOption(t, pathTemplate, p, importArgNode),
             resolveOption(t, resolveTemplate, importArgNode),
-            chunkNameOption(t, chunkNameTemplate, importArgNode)
+            chunkNameOption(t, chunkNameTemplate, p, importArgNode)
           ]
           : [
             idOption(t, importArgNode),
@@ -216,7 +236,7 @@ module.exports = function universalImportPlugin({ types: t, template }) {
             loadOption(t, loadTemplate, p, importArgNode, cssOptions), // only when not on a babel-server
             pathOption(t, pathTemplate, p, importArgNode),
             resolveOption(t, resolveTemplate, importArgNode),
-            chunkNameOption(t, chunkNameTemplate, importArgNode)
+            chunkNameOption(t, chunkNameTemplate, p, importArgNode)
           ]
 
         const options = t.objectExpression(opts)
