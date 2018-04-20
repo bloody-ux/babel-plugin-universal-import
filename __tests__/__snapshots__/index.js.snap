@@ -16,7 +16,7 @@ async ({
   page
 }) => await _universalImport(() => Promise.all([import(
 /* webpackChunkName: 'components/[request]' */
-\`../components/\${page}\`), _importCss(\`components/\${page.split(\\"/\\").join(\\"-\\")}\`, {})]).then(proms => proms[0]), false);
+\`../components/\${page}\`), _importCss(\`components/\${page.replace(/\\\\//g, \\"-\\")}\`, {})]).then(proms => proms[0]), false);
 "
 `;
 
@@ -90,10 +90,10 @@ _universalImport({
   file: \\"currentFile.js\\",
   load: () => Promise.all([import(
   /* webpackChunkName: 'base/[request]' */
-  \`../../base/\${page}\`), _importCss(\`base/\${page.split(\\"/\\").join(\\"-\\")}\`, {})]).then(proms => proms[0]),
+  \`../../base/\${page}\`), _importCss(\`base/\${page.replace(/\\\\//g, \\"-\\")}\`, {})]).then(proms => proms[0]),
   path: () => _path.join(__dirname, \`../../base/\${page}\`),
   resolve: () => require.resolveWeak(\`../../base/\${page}\`),
-  chunkName: () => \`base/\${page.split(\\"/\\").join(\\"-\\")}\`
+  chunkName: () => \`base/\${page.replace(/\\\\//g, \\"-\\")}\`
 });
 "
 `;
@@ -117,10 +117,10 @@ _universalImport({
   file: \\"currentFile.js\\",
   load: () => Promise.all([import(
   /* webpackChunkName: '[request]' */
-  \`./\${page}\`), _importCss(\`\${page.split(\\"/\\").join(\\"-\\")}\`, {})]).then(proms => proms[0]),
+  \`./\${page}\`), _importCss(\`\${page.replace(/\\\\//g, \\"-\\")}\`, {})]).then(proms => proms[0]),
   path: () => _path.join(__dirname, \`./\${page}\`),
   resolve: () => require.resolveWeak(\`./\${page}\`),
-  chunkName: () => \`\${page.split(\\"/\\").join(\\"-\\")}\`
+  chunkName: () => \`\${page.replace(/\\\\//g, \\"-\\")}\`
 });
 "
 `;
@@ -144,10 +144,10 @@ _universalImport({
   file: \\"currentFile.js\\",
   load: () => Promise.all([import(
   /* webpackChunkName: 'base/[request]' */
-  \`./base/\${page}/nested/{$another}folder\`), _importCss(\`base/\${page.split(\\"/\\").join(\\"-\\")}-nested-{$another}folder\`, {})]).then(proms => proms[0]),
+  \`./base/\${page}/nested/{$another}folder\`), _importCss(\`base/\${page.replace(/\\\\//g, \\"-\\")}-nested-{$another}folder\`, {})]).then(proms => proms[0]),
   path: () => _path.join(__dirname, \`./base/\${page}/nested/{$another}folder\`),
   resolve: () => require.resolveWeak(\`./base/\${page}/nested/{$another}folder\`),
-  chunkName: () => \`base/\${page.split(\\"/\\").join(\\"-\\")}-nested-{$another}folder\`
+  chunkName: () => \`base/\${page.replace(/\\\\//g, \\"-\\")}-nested-{$another}folder\`
 });
 "
 `;
@@ -171,10 +171,10 @@ _universalImport({
   file: \\"currentFile.js\\",
   load: () => Promise.all([import(
   /* webpackChunkName: 'base/[request]' */
-  \`./base/\${page}/nested/folder\`), _importCss(\`base/\${page.split(\\"/\\").join(\\"-\\")}-nested-folder\`, {})]).then(proms => proms[0]),
+  \`./base/\${page}/nested/folder\`), _importCss(\`base/\${page.replace(/\\\\//g, \\"-\\")}-nested-folder\`, {})]).then(proms => proms[0]),
   path: () => _path.join(__dirname, \`./base/\${page}/nested/folder\`),
   resolve: () => require.resolveWeak(\`./base/\${page}/nested/folder\`),
-  chunkName: () => \`base/\${page.split(\\"/\\").join(\\"-\\")}-nested-folder\`
+  chunkName: () => \`base/\${page.replace(/\\\\//g, \\"-\\")}-nested-folder\`
 });
 "
 `;
@@ -198,10 +198,10 @@ _universalImport({
   file: \\"currentFile.js\\",
   load: () => Promise.all([import(
   /* webpackChunkName: 'base/[request]' */
-  \`./base/\${page}\`), _importCss(\`base/\${page.split(\\"/\\").join(\\"-\\")}\`, {})]).then(proms => proms[0]),
+  \`./base/\${page}\`), _importCss(\`base/\${page.replace(/\\\\//g, \\"-\\")}\`, {})]).then(proms => proms[0]),
   path: () => _path.join(__dirname, \`./base/\${page}\`),
   resolve: () => require.resolveWeak(\`./base/\${page}\`),
-  chunkName: () => \`base/\${page.split(\\"/\\").join(\\"-\\")}\`
+  chunkName: () => \`base/\${page.replace(/\\\\//g, \\"-\\")}\`
 });
 "
 `;

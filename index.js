@@ -61,13 +61,15 @@ function createTrimmedChunkName(t, importArgNode, originMagicChunkName) {
     // just keep consistent with webpack
     let expressions = importArgNode.expressions.slice(0)
     expressions = expressions.map(exp => {
-      const splitCallee = t.memberExpression(exp, t.identifier('split'))
-      const splitExp = t.callExpression(splitCallee, [t.stringLiteral('/')])
+      const replaceCallee = t.memberExpression(exp, t.identifier('replace'))
+      const regExpression = t.regExpLiteral('\\/', 'g')
 
-      const joinCallee = t.memberExpression(splitExp, t.identifier('join'))
-      const joinExp = t.callExpression(joinCallee, [t.stringLiteral('-')])
+      const replaceExp = t.callExpression(replaceCallee, [
+        regExpression,
+        t.stringLiteral('-')
+      ])
 
-      return joinExp
+      return replaceExp
     })
 
     return Object.assign({}, importArgNode, {

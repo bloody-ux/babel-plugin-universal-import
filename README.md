@@ -101,12 +101,12 @@ import importCss from 'babel-plugin-universal-import2/importCss.js'
 import path from 'path'
 
 const UniversalComponent = universal(props => universalImport({
-  chunkName: props => props.page.split("/").join("-"),
+  chunkName: props => props.page.replace(/\//g, '-'),
   path: props => path.join(__dirname, `./${props.page}`),
   resolve: props => require.resolveWeak(`./${props.page}`),
   load: props => Promise.all([
     import( /* webpackChunkName: '[request]' */ `./${props.page}`),
-    importCss(props.page.split("/").join("-"))
+    importCss(props.page.replace(/\//g, '-'))
   ]).then(proms => proms[0])
 }));
 
