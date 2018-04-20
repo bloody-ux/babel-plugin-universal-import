@@ -39,6 +39,11 @@
   <img src="https://s3-us-west-1.amazonaws.com/cdn.reactlandia.com/universal-component-banner.png" />
 </p>
 
+## What's New(diffs from universal-import)
+
+- supported subfolder in dynamic import, which means `universal((props) => import(``$./pages/{props.page}``))` can pass value like `xxxx/yyyy` to `page` property.
+- supported magic comment in client code, when magic comment is set, it replaces plugin's default implementation, which means the plugin supports `universal((props) => import(/* webpackChunkName: "[request]" */``$./pages/{props.page}``))`. And it's more controllable for generated file structure.
+
 ## Installation
 ```
 yarn add babel-plugin-universal-import2
@@ -96,12 +101,12 @@ import importCss from 'babel-plugin-universal-import2/importCss.js'
 import path from 'path'
 
 const UniversalComponent = universal(props => universalImport({
-  chunkName: props => props.page,
+  chunkName: props => props.page.split("/").join("-"),
   path: props => path.join(__dirname, `./${props.page}`),
   resolve: props => require.resolveWeak(`./${props.page}`),
   load: props => Promise.all([
     import( /* webpackChunkName: '[request]' */ `./${props.page}`),
-    importCss(props.page)
+    importCss(props.page.split("/").join("-"))
   ]).then(proms => proms[0])
 }));
 
@@ -146,7 +151,7 @@ If your compiling the server with Babel, set the following option so `import()` 
 ```js
 {
   "plugins": [
-    ["universal-import", {
+    ["universal-import2", {
       "babelServer": true
     }]
   ]
@@ -160,7 +165,7 @@ When navigating across pages, warnings will be displayed to alert you about any 
 ```js
 {
   "plugins": [
-    ["universal-import", {
+    ["universal-import2", {
       "disableWarnings": true
     }]
   ]

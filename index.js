@@ -48,14 +48,31 @@ function createTrimmedChunkName(t, importArgNode, originMagicChunkName) {
   if (importArgNode.quasis) {
     let quasis = importArgNode.quasis.slice(0)
     const baseDir = trimChunkNameBaseDir(quasis[0].value.cooked)
+
+    // for quasi before expression, can be customized with webpackChunkName
+    const realBaseDir = originMagicChunkName ? originPrefix : baseDir
     quasis[0] = Object.assign({}, quasis[0], {
-      value: { raw: originPrefix || baseDir, cooked: originPrefix || baseDir }
+      value: { raw: realBaseDir, cooked: realBaseDir }
     })
 
     quasis = quasis.map((quasi, i) => (i > 0 ? prepareQuasi(quasi) : quasi))
 
+    // why need this? webpack will convert runtime import path from xxxx/yyyy to xxxx-yyyy
+    // just keep consistent with webpack
+    let expressions = importArgNode.expressions.slice(0)
+    expressions = expressions.map(exp => {
+      const splitCallee = t.memberExpression(exp, t.identifier('split'))
+      const splitExp = t.callExpression(splitCallee, [t.stringLiteral('/')])
+
+      const joinCallee = t.memberExpression(splitExp, t.identifier('join'))
+      const joinExp = t.callExpression(joinCallee, [t.stringLiteral('-')])
+
+      return joinExp
+    })
+
     return Object.assign({}, importArgNode, {
-      quasis
+      quasis,
+      expressions
     })
   }
 
@@ -127,18 +144,19 @@ function getCssOptionExpression(t, cssOptions) {
 
 function loadOption(t, loadTemplate, p, importArgNode, cssOptions) {
   const argPath = getImportArgPath(p)
-  const orginMagicChunkName = getOriginMagicCommentChunkName(p)
-  if (!orginMagicChunkName) {
-    const chunkName = getMagicCommentChunkName(importArgNode)
-    delete argPath.node.leadingComments
-    argPath.addComment('leading', ` webpackChunkName: '${chunkName}' `)
-  }
+
+  // get something like pages/[request]
+  const originMagicChunkName = getOriginMagicCommentChunkName(p)
+  const chunkName =
+    originMagicChunkName || getMagicCommentChunkName(importArgNode)
+  delete argPath.node.leadingComments
+  argPath.addComment('leading', ` webpackChunkName: '${chunkName}' `)
 
   const cssOpts = getCssOptionExpression(t, cssOptions)
   const load = loadTemplate({
     IMPORT: argPath.parent,
     IMPORT_CSS: getImport(p, IMPORT_CSS_DEFAULT),
-    MODULE: createTrimmedChunkName(t, importArgNode, orginMagicChunkName),
+    MODULE: createTrimmedChunkName(t, importArgNode, chunkName),
     CSS_OPTIONS: cssOpts
   }).expression
 
@@ -204,8 +222,7 @@ module.exports = function universalImportPlugin({ types: t, template }) {
         const importArgNode = getImportArgPath(p).node
         const universalImport = getImport(p, IMPORT_UNIVERSAL_DEFAULT)
         const cssOptions = {
-          disableWarnings: this.opts.disableWarnings,
-          cssPathIndent: this.opts.cssPathIndent // only json file is supported
+          disableWarnings: this.opts.disableWarnings
         }
 
         // if being used in an await statement, return load() promise
